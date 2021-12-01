@@ -17,23 +17,23 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "First Name is required")
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
+    @NotNull(message = "Last Name is required")
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Username is required")
     @Column(name = "username")
     private String username;
 
+    @NotNull(message = "Password is required")
     @Column(name = "password")
-    @NotNull
     private String password;
 
-    @NotNull
+    @NotNull(message = "Email is required")
     @Column(name = "email")
     private String email;
 
