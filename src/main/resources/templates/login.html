@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,8 +38,8 @@
         <h3>Login for the Best experience</h3>
     </section>
 
-    <div id = "loginBody">
-        <form>
+    <div id = "loginBody" >
+        <form th:action="@{/processSignInForm}" method="post" class="form-horizontal">
             <input type="text" placeholder="Username" class="input-group-addon"/>
             <input type="password" placeholder="Password" class="input-group-addon"/>
             <input type="submit" placeholder="" > 

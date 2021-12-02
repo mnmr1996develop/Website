@@ -23,11 +23,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
+    @Autowired
+    private UserService userService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/").permitAll();
+                .antMatchers("/").permitAll()
+                .and()
+                .formLogin()
+                .loginProcessingUrl("/processSignInForm")
+                .loginPage("login");
     }
 
 
