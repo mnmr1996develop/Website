@@ -82,6 +82,26 @@ a.active,a:hover{
     display: none;
 }
 
+#loginBody{
+    width: 50ch;
+    color: black;
+    margin-left: 65%;
+    background-color: #BCFD4C;
+    border-radius: .5rem;
+    height: 40rem;
+    text-align: center;
+}
+
+#loginBody input {
+    width: 80%;
+    margin-top: 40px;
+    padding: 1.5rem
+}
+
+#registerNew{
+    margin-top: 15px;
+}
+
 @media(max-width: 952px){
     label.logo{
         font-size: 3.0rem;
@@ -94,6 +114,12 @@ a.active,a:hover{
 }
 
 @media(max-width: 858px){
+    #loginBody{
+
+        margin-left: 25%;
+    }
+
+
     .checkbtn {
         display: block;
     }

@@ -27,12 +27,29 @@
                 <li><a href="">Notes</a></li>
                 <li><a href="">Profile</a></li>
                 <li><a href="">Pages</a></li>
-                <li class="active"><a href="/login">Sign In</a></li>
+                <li><a class="active" href="/login">Sign In</a></li>
             </ul>
         </nav>
     </div>
 
+<div id="loginPageBody">
 
+    <section>
+        <h3>Login for the Best experience</h3>
+    </section>
+
+    <div id = "loginBody">
+        <form>
+            <input type="text" placeholder="Username" class="input-group-addon"/>
+            <input type="password" placeholder="Password" class="input-group-addon"/>
+            <input type="submit" placeholder="" > 
+        </form>
+        
+        <div id="registerNew">
+            <a th:href="@{/signUp}" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a>
+        </div>
+    </div>
+</div>
 
 </div>
 </body>
