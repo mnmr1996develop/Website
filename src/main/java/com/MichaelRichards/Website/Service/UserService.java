@@ -22,8 +22,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     public List<User> findAll(){
         List<User> users = userRepository.findAll();
@@ -41,8 +39,12 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public String save(User user){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         String token = UUID.randomUUID().toString();
+
+        System.out.println(user);
         userRepository.save(user);
 
         return token;

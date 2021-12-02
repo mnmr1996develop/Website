@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/9b475bda6b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Michael</title>
+
+</head>
+<body>
+<div id="page">
+    <div id ="nav">
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars fa"></i>
+            </label>
+            <label class="animate__animated animate__slideInLeft logo"> <a href="/">Project</a></label>
+            <ul class="animate__animated animate__slideInRight" >
+                <li><a href="/">Home</a></li>
+                <li><a href="">Notes</a></li>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Pages</a></li>
+                <li><a class="active" href="/login">Sign In</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="loginPageBody">
+
+        <section>
+            <h3>Login for the Best experience</h3>
+        </section>
+
+        <div id = "registerBody" >
+
+            
+            <form th:action="@{/processRegistrationForm}" method="post" class="form-horizontal" th:object="${user}">
+
+                <div>
+                    <input type="text" placeholder="First Name" class="input-group-addon" th:field="*{firstName}"/>
+                </div>
+
+                <div>
+                    <input type="text" placeholder="Last Name" class="input-group-addon" th:field="*{lastName}" />
+                </div>
+
+                <div>
+                    <input type="text" placeholder="Username" class="input-group-addon" th:field="*{username}"/>
+                </div>
+
+                <div>
+                    <input type="text" placeholder="email" class="input-group-addon" th:field="*{email}"/>
+                </div>
+
+                <div>
+                    <input type="password" placeholder="Password" class="input-group-addon" th:field="*{password}"/>
+                </div>
+
+                <div>
+                    <input type="password" placeholder="Re-type Password" class="input-group-addon"/>
+                    
+                </div>
+
+                <div>
+                    <input type="date" placeholder="Birthday" class="input-group-addon" />
+                    <h4>Birthday</h4>
+                </div>
+
+                <div>
+                    <input type="submit" placeholder=""  class="btn btn-success">
+                </div>
+            </form>
+
+            <div id="registerNew">
+                <a th:href="@{/signUp}" class="btn btn-primary" role="button" aria-pressed="true">Register New User</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="/js/modernizr-custom.js"></script>
+</html>

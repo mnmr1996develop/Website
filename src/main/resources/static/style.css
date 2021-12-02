@@ -102,6 +102,26 @@ a.active,a:hover{
     margin-top: 15px;
 }
 
+
+#registerBody{
+    width: 50ch;
+    color: black;
+    margin-left: 65%;
+    background-color: #BCFD4C;
+    border-radius: .5rem;
+    height: 85rem;
+    text-align: center;
+}
+
+
+#registerBody input {
+    width: 80%;
+    margin-top: 40px;
+    padding: 1.5rem
+}
+
+
+
 @media(max-width: 952px){
     label.logo{
         font-size: 3.0rem;
@@ -111,14 +131,20 @@ a.active,a:hover{
     nav ul li a{
         font-size: 1.6rem;
     }
-}
 
-@media(max-width: 858px){
     #loginBody{
 
         margin-left: 25%;
     }
 
+    #registerBody{
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+}
+
+@media(max-width: 858px){
+    
 
     .checkbtn {
         display: block;

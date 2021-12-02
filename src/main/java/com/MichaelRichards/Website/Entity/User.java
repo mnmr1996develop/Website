@@ -37,8 +37,9 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @NotNull
+
     @Column(name = "birthday")
+    @Transient
     private Date birthday;
 
     @NotNull
@@ -144,5 +145,20 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", locked=" + locked +
+                ", enabled=" + enabled +
+                '}';
     }
 }
