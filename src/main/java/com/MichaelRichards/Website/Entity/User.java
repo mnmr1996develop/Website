@@ -5,8 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.sql.Date;
+import java.util.Collection;
+
 
 @Entity
 @Table(name = "user")
@@ -37,10 +38,12 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
-
-    @Column(name = "birthday")
-    @Transient
+    @NotNull
+    @Column(name = "birthday", columnDefinition = "DATE")
     private Date birthday;
+
+
+
 
     @NotNull
     @Column(name = "locked")
@@ -50,19 +53,8 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
-    public User(String username, String password, String firstName, String lastName, Date birthday, String email, boolean locked, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.email = email;
-        this.locked = locked;
-        this.enabled = enabled;
-    }
 
-    public User() {
-    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -86,7 +78,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @Override
@@ -96,7 +88,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
+    }
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String username, String password, String email, Date birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.birthday = birthday;
+        this.locked = false;
+        this.enabled = true;
     }
 
     public Long getId() {
@@ -105,14 +111,6 @@ public class User implements UserDetails {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -131,12 +129,12 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -145,6 +143,27 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
