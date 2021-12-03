@@ -32,7 +32,20 @@ public class RegistrationController {
             BindingResult result,
             Model model){
 
-        System.out.println(user);
+        User findIfUserInDatabase = userService.findUserByUsername(user.getUsername()).orElse(null);
+        User findIfEmailInDatabase = userService.findUserByEmail(user.getEmail()).orElse(null);
+
+        if(findIfUserInDatabase != null || findIfEmailInDatabase != null){
+            if (findIfUserInDatabase != null){
+                model.addAttribute("usernameRegistrationError" , "User name already exists.");
+            }
+            if (findIfEmailInDatabase != null){
+                model.addAttribute("emailRegistrationError", "Email already exists");
+            }
+
+            return "register";
+        }
+
 
         if(result.hasErrors()){
             return "register";
