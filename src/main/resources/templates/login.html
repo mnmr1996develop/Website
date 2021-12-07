@@ -16,20 +16,28 @@
 <body>
 <div id="page">
     <div id ="nav">
-        <nav>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fas fa-bars fa"></i>
-            </label>
-            <label class="animate__animated animate__slideInLeft logo"> <a href="/">Project</a></label>
-            <ul class="animate__animated animate__slideInRight" >
-                <li><a href="/">Home</a></li>
-                <li><a href="">Notes</a></li>
-                <li><a href="">Profile</a></li>
-                <li><a href="">Pages</a></li>
-                <li><a class="active" href="/login">Sign In</a></li>
-            </ul>
-        </nav>
+        <div class="navBody">
+            <nav>
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars fa"></i>
+                </label>
+                <label class="animate__animated animate__slideInLeft logo"> <a href="/">Project</a></label>
+                <ul class="animate__animated animate__slideInRight" >
+                    <li><a href="/">Home</a></li>
+                    <li><a href="">Notes</a></li>
+                    <li><a href="">Profile</a></li>
+                    <li><a href="">Pages</a></li>
+                    <li sec:authorize="!isAuthenticated()" class="active"><a href="/login">Login</a></li>
+                    <li sec:authorize="isAuthenticated()" class="active"><a class="nav-link" href="javascript: document.logoutForm.submit()" >Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="logout">
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input hidden type="submit" value="Logout"/>
+            </form>
+        </div>
     </div>
 
 <div id="loginPageBody">

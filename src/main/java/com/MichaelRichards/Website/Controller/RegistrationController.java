@@ -37,10 +37,10 @@ public class RegistrationController {
 
         if(findIfUserInDatabase != null || findIfEmailInDatabase != null){
             if (findIfUserInDatabase != null){
-                model.addAttribute("usernameRegistrationError" , "User name already exists.");
+                model.addAttribute("usernameRegistrationError" , "User name already Taken");
             }
             if (findIfEmailInDatabase != null){
-                model.addAttribute("emailRegistrationError", "Email already exists");
+                model.addAttribute("emailRegistrationError", "Email is already taken");
             }
 
             return "register";
