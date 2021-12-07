@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +16,7 @@
 <body>
 <div id="page">
   <div id ="nav">
+    <div class="navBody">
     <nav>
       <input type="checkbox" id="check">
       <label for="check" class="checkbtn">
@@ -27,9 +28,16 @@
         <li><a href="">Notes</a></li>
         <li><a href="">Profile</a></li>
         <li><a href="">Pages</a></li>
-        <li><a href="/login">Sign In</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+        <li sec:authorize="isAuthenticated()"><a class="nav-link" href="javascript: document.logoutForm.submit()" >Logout</a></li>
       </ul>
     </nav>
+    </div>
+    <div id="logout">
+      <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+        <input hidden type="submit" value="Logout"/>
+      </form>
+    </div>
   </div>
 
   

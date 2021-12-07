@@ -41,7 +41,7 @@
         <div id = "registerBody" >
 
             
-            <form th:action="@{/processRegistrationForm}" method="post" class="form-horizontal" th:object="${user}">
+            <form action="#" th:action="@{processRegistrationForm}" method="post" class="form-horizontal" th:object="${user}">
 
                 <div>
                     <input type="text" placeholder="First Name" class="input-group-addon" th:field="*{firstName}"/>
@@ -53,10 +53,12 @@
 
                 <div>
                     <input type="text" placeholder="Username" class="input-group-addon" th:field="*{username}"/>
+                    <div th:if="${usernameRegistrationError}" style="color:red" th:text="${usernameRegistrationError}"></div>
                 </div>
 
                 <div>
                     <input type="text" placeholder="email" class="input-group-addon" th:field="*{email}"/>
+                    <div th:if="${emailRegistrationError}" style="color:red" th:text="${emailRegistrationError}"></div>
                 </div>
 
                 <div>

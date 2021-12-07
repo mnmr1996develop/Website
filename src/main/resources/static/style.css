@@ -24,7 +24,6 @@ nav {
 
 #page {
 
-
     color: #DEB992;
 }
 
@@ -109,7 +108,7 @@ a.active,a:hover{
     margin-left: 65%;
     background-color: #BCFD4C;
     border-radius: .5rem;
-    height: 85rem;
+    height: 90rem;
     text-align: center;
 }
 
