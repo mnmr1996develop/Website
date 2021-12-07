@@ -1,12 +1,15 @@
 package com.MichaelRichards.Website.Entity;
 
+import com.MichaelRichards.Website.Validation.ValidEmail;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Collections;
 
 
 @Entity
@@ -36,14 +39,12 @@ public class User implements UserDetails {
 
     @NotNull(message = "Email is required")
     @Column(name = "email")
+    @ValidEmail
     private String email;
 
     @NotNull
     @Column(name = "birthday", columnDefinition = "DATE")
     private Date birthday;
-
-
-
 
     @NotNull
     @Column(name = "locked")
@@ -53,12 +54,16 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Transient
+    private UserRoles userRoles;
+
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("userRoles.name()");
+        return Collections.singletonList(simpleGrantedAuthority);
     }
 
     @Override
@@ -92,6 +97,9 @@ public class User implements UserDetails {
     }
 
     public User() {
+        this.locked = false;
+        this.enabled = true;
+        this.userRoles = UserRoles.User;
     }
 
     public User(String firstName, String lastName, String username, String password, String email, Date birthday) {
@@ -103,6 +111,7 @@ public class User implements UserDetails {
         this.birthday = birthday;
         this.locked = false;
         this.enabled = true;
+        this.userRoles = UserRoles.User;
     }
 
     public Long getId() {
@@ -153,7 +162,6 @@ public class User implements UserDetails {
         this.birthday = birthday;
     }
 
-
     public boolean isLocked() {
         return locked;
     }
@@ -164,6 +172,18 @@ public class User implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public UserRoles getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(UserRoles userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override
