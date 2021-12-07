@@ -1,6 +1,6 @@
 package com.MichaelRichards.Website.Config;
 
-import com.MichaelRichards.Website.Service.UserService;
+import com.MichaelRichards.Website.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,16 +9,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class StudentSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    private UserService userService;
+    private StudentService studentService;
 
 
     @Override
@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
+        provider.setUserDetailsService(studentService);
         provider.setPasswordEncoder(new PasswordEncoderClass().passwordEncoder());
         return provider;
     }

@@ -14,7 +14,7 @@ import java.util.Collections;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class Student implements UserDetails {
 
     @Id
     @Column(name = "id")
@@ -96,13 +96,13 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public User() {
+    public Student() {
         this.locked = false;
         this.enabled = true;
         this.userRoles = UserRoles.User;
     }
 
-    public User(String firstName, String lastName, String username, String password, String email, Date birthday) {
+    public Student(String firstName, String lastName, String username, String password, String email, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -188,7 +188,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

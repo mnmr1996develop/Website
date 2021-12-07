@@ -1,7 +1,7 @@
 package com.MichaelRichards.Website.Controller;
 
-import com.MichaelRichards.Website.Entity.User;
-import com.MichaelRichards.Website.Service.UserService;
+import com.MichaelRichards.Website.Entity.Student;
+import com.MichaelRichards.Website.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,26 +18,26 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     @Autowired
-    private UserService userService;
+    private StudentService studentService;
 
     @GetMapping("/register")
     public String getRegistrationPage(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Student());
         return "register";
     }
 
     @PostMapping("/processRegistrationForm")
     public String processRegistrationForm(
-            @Valid @ModelAttribute("user") User user,
+            @Valid @ModelAttribute("student") Student student,
             BindingResult result,
             Model model){
 
-        User findIfUserInDatabase = userService.findUserByUsername(user.getUsername()).orElse(null);
-        User findIfEmailInDatabase = userService.findUserByEmail(user.getEmail()).orElse(null);
+        Student findIfStudentInDatabase = studentService.findUserByUsername(student.getUsername()).orElse(null);
+        Student findIfEmailInDatabase = studentService.findUserByEmail(student.getEmail()).orElse(null);
 
-        if(findIfUserInDatabase != null || findIfEmailInDatabase != null){
-            if (findIfUserInDatabase != null){
-                model.addAttribute("usernameRegistrationError" , "User name already Taken");
+        if(findIfStudentInDatabase != null || findIfEmailInDatabase != null){
+            if (findIfStudentInDatabase != null){
+                model.addAttribute("usernameRegistrationError" , "Student name already Taken");
             }
             if (findIfEmailInDatabase != null){
                 model.addAttribute("emailRegistrationError", "Email is already taken");
@@ -51,7 +51,7 @@ public class RegistrationController {
             return "register";
         }
 
-        userService.save(user);
+        studentService.save(student);
         return "index";
 
     }

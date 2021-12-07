@@ -1,6 +1,6 @@
 package com.MichaelRichards.Website.DAO;
 
-import com.MichaelRichards.Website.Entity.User;
+import com.MichaelRichards.Website.Entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    Optional<User> findByUsername(String username);
+    Optional<Student> findByUsername(String username);
 
-    Optional<User> findByEmail(String email);
+    Optional<Student> findByEmail(String email);
 
 
 }
