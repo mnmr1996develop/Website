@@ -41,28 +41,33 @@
         <div id = "registerBody" >
 
             
-            <form action="#" th:action="@{processRegistrationForm}" method="post" class="form-horizontal" th:object="${student}">
+            <form action="#" th:action="@{processStudentRegistrationForm}" method="post" class="form-horizontal" th:object="${student}">
 
                 <div>
                     <input type="text" placeholder="First Name" class="input-group-addon" th:field="*{firstName}"/>
+                    <div th:if="${#fields.hasErrors('firstName')}"  class="alert alert-danger col-xs-offset-1 col-xs-10">First Name Required</div>
                 </div>
 
                 <div>
                     <input type="text" placeholder="Last Name" class="input-group-addon" th:field="*{lastName}" />
+                    <div th:if="${#fields.hasErrors('lastName')}"  class="alert alert-danger col-xs-offset-1 col-xs-10">Last Name Required</div>
                 </div>
 
                 <div>
                     <input type="text" placeholder="Username" class="input-group-addon" th:field="*{username}"/>
-                    <div th:if="${usernameRegistrationError}" style="color:red" th:text="${usernameRegistrationError}"></div>
+                    <div th:if="${#fields.hasErrors('username')}"  class="alert alert-danger col-xs-offset-1 col-xs-10">User Name Required</div>
+                    <div th:if="${usernameRegistrationError}" style="color:red" th:text="${usernameRegistrationError}"  class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
                 </div>
 
                 <div>
                     <input type="text" placeholder="email" class="input-group-addon" th:field="*{email}"/>
-                    <div th:if="${emailRegistrationError}" style="color:red" th:text="${emailRegistrationError}"></div>
+                    <div th:if="${#fields.hasErrors('email')}"  class="alert alert-danger col-xs-offset-1 col-xs-10">Email Required</div>
+                    <div th:if="${emailRegistrationError}" style="color:red" th:text="${emailRegistrationError}"  class="alert alert-danger col-xs-offset-1 col-xs-10"></div>
                 </div>
 
                 <div>
                     <input type="password" placeholder="Password" class="input-group-addon" th:field="*{password}"/>
+                    <div th:if="${#fields.hasErrors('email')}"  class="alert alert-danger col-xs-offset-1 col-xs-10">Email Required</div>
                 </div>
 
                 <div>
@@ -73,6 +78,7 @@
                 <div>
                     <input type="date" placeholder="Birthday" class="input-group-addon" th:field="*{birthday}"/>
                     <h4>Birthday</h4>
+                    <div th:if="${birthday}" class="alert alert-danger col-xs-offset-1 col-xs-10" ></div>
                 </div>
 
                 <div>

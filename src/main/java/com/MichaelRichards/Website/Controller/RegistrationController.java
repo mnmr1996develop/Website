@@ -20,13 +20,13 @@ public class RegistrationController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/register")
+    @GetMapping("/studentRegistration")
     public String getRegistrationPage(Model model){
-        model.addAttribute("user", new Student());
-        return "register";
+        model.addAttribute("student", new Student());
+        return "studentRegistration";
     }
 
-    @PostMapping("/processRegistrationForm")
+    @PostMapping("/processStudentRegistrationForm")
     public String processRegistrationForm(
             @Valid @ModelAttribute("student") Student student,
             BindingResult result,
@@ -37,18 +37,18 @@ public class RegistrationController {
 
         if(findIfStudentInDatabase != null || findIfEmailInDatabase != null){
             if (findIfStudentInDatabase != null){
-                model.addAttribute("usernameRegistrationError" , "Student name already Taken");
+                model.addAttribute("usernameRegistrationError" , "username already Taken");
             }
             if (findIfEmailInDatabase != null){
                 model.addAttribute("emailRegistrationError", "Email is already taken");
             }
 
-            return "register";
+            return "studentRegistration";
         }
 
 
         if(result.hasErrors()){
-            return "register";
+            return "studentRegistration";
         }
 
         studentService.save(student);

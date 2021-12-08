@@ -28,12 +28,12 @@ public class LoginController {
     }
 
 
-    @GetMapping("/login")
+    @GetMapping("/studentLogin")
     public String getLoginPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            model.addAttribute("user", new Student());
-            return "login";
+            model.addAttribute("student", new Student());
+            return "studentLogin";
         }
 
         return "redirect:/";

@@ -28,9 +28,9 @@
         <li><a href="#" th:href="@{/}">Notes</a></li>
         <li><a href="">Profile</a></li>
         <li><a href="">Pages</a></li>
-        <li sec:authorize="!isAuthenticated()"><a href="/login">Student Login</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/studentLogin">Student Login</a></li>
         <li sec:authorize="isAuthenticated()"><a class="nav-link" href="javascript: document.logoutForm.submit()" >Logout</a></li>
-        <li sec:authorize="!isAuthenticated()"><a href="/login">Teacher login</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/teacherLogin">Teacher login</a></li>
       </ul>
     </nav>
     </div>

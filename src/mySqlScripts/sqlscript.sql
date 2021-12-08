@@ -7,7 +7,7 @@ drop table if exists `user`;
 SET FOREIGN_KEY_CHECKS = 0;
 
 
-CREATE TABLE `user` (
+CREATE TABLE `Student` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,

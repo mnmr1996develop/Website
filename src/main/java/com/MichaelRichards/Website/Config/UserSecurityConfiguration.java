@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class StudentSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
@@ -47,8 +47,8 @@ public class StudentSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/processSignInForm")
+                .loginPage("/studentLogin")
+                .loginProcessingUrl("/processStudentSignInForm")
                 .permitAll()
                 .and()
                 .logout().permitAll();
