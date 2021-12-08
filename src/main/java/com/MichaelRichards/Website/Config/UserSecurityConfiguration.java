@@ -17,29 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    private StudentService studentService;
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-
-    }
-
-
-    @Bean
-    DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
-        provider.setUserDetailsService(studentService);
-        provider.setPasswordEncoder(new PasswordEncoderClass().passwordEncoder());
-        return provider;
-    }
-
-
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
