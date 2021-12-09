@@ -1,6 +1,7 @@
 package com.MichaelRichards.Website.Controller;
 
 import com.MichaelRichards.Website.Entity.Student;
+import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,8 @@ public class RegistrationController {
             BindingResult result,
             Model model){
 
-        Student findIfStudentInDatabase = studentService.findUserByUsername(student.getUsername()).orElse(null);
-        Student findIfEmailInDatabase = studentService.findUserByEmail(student.getEmail()).orElse(null);
+        User findIfStudentInDatabase = studentService.findUserByUsername(student.getUsername()).orElse(null);
+        User findIfEmailInDatabase = studentService.findUserByEmail(student.getEmail()).orElse(null);
 
         if(findIfStudentInDatabase != null || findIfEmailInDatabase != null){
             if (findIfStudentInDatabase != null){
