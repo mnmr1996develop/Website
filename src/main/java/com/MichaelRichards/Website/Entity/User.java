@@ -1,6 +1,7 @@
 package com.MichaelRichards.Website.Entity;
 
 import com.MichaelRichards.Website.Validation.ValidEmail;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,14 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 
+@MappedSuperclass
 public class User implements UserDetails {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull(message = "First Name is required")
@@ -40,8 +43,9 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull
-    @Column(name = "birthday", columnDefinition = "DATE")
-    private Date birthday;
+    @Column(name = "birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
 
     @NotNull
     @Column(name = "locked")
@@ -53,6 +57,9 @@ public class User implements UserDetails {
 
     @Transient
     private UserRoles userRoles;
+
+    @Transient
+    private Integer age;
 
 
 
@@ -99,7 +106,7 @@ public class User implements UserDetails {
         this.userRoles = UserRoles.User;
     }
 
-    public User(String firstName, String lastName, String username, String password, String email, Date birthday) {
+    public User(String firstName, String lastName, String username, String password, String email, LocalDate birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -151,11 +158,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -181,6 +188,14 @@ public class User implements UserDetails {
 
     public void setUserRoles(UserRoles userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override

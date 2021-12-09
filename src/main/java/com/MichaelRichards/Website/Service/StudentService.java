@@ -1,7 +1,10 @@
 package com.MichaelRichards.Website.Service;
 
+
 import com.MichaelRichards.Website.DAO.StudentRepository;
+import com.MichaelRichards.Website.DAO.UserRepository;
 import com.MichaelRichards.Website.Entity.Student;
+import com.MichaelRichards.Website.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,7 +39,10 @@ public class StudentService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Student student = studentRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Could not find a student by that name "));
+        Student student = null;
+
+        student =  studentRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(""));
+
         return student;
     }
 
