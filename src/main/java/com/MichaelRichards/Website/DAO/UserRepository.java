@@ -5,10 +5,6 @@ package com.MichaelRichards.Website.DAO;
 import com.MichaelRichards.Website.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-
-
-
-
 import java.util.Optional;
 
 
