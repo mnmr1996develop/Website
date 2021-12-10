@@ -1,8 +1,6 @@
 package com.MichaelRichards.Website.Service;
 
 import com.MichaelRichards.Website.DAO.TeacherRepository;
-import com.MichaelRichards.Website.DAO.UserRepository;
-import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

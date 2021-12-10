@@ -2,7 +2,6 @@ package com.MichaelRichards.Website.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.time.LocalDate;
 
 

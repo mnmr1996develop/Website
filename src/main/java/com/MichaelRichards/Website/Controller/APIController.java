@@ -3,7 +3,6 @@ package com.MichaelRichards.Website.Controller;
 
 import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Teacher;
-import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
 import com.MichaelRichards.Website.Service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;

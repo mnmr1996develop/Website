@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -191,7 +191,7 @@ public class User implements UserDetails {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(birthday, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
@@ -211,6 +211,7 @@ public class User implements UserDetails {
                 ", locked=" + locked +
                 ", enabled=" + enabled +
                 ", userRoles=" + userRoles +
+                ", age=" + age +
                 '}';
     }
 }
