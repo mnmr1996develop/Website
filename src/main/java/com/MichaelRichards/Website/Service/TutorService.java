@@ -3,16 +3,20 @@ package com.MichaelRichards.Website.Service;
 import com.MichaelRichards.Website.DAO.TutorRepository;
 import com.MichaelRichards.Website.Entity.Tutor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class TeacherService {
+public class TutorService  implements UserDetailsService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -38,5 +42,21 @@ public class TeacherService {
         tutorRepository.save(tutor);
 
         return token;
+    }
+
+    public Optional<Tutor> findUserByUsername(String username) throws UsernameNotFoundException {
+        return tutorRepository.findByUsername(username);
+    }
+
+    public Optional<Tutor> findUserByEmail(String email) throws UsernameNotFoundException{
+        return tutorRepository.findByEmail(email);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Tutor tutor;
+        tutor = tutorRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No User by that name"));
+        return tutor;
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class StudentService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Student student = null;
 
-        student =  studentRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(""));
+        student =  studentRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No User by that name"));
 
         return student;
     }

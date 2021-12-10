@@ -1,6 +1,8 @@
 package com.MichaelRichards.Website.Controller;
 
 import com.MichaelRichards.Website.Entity.Student;
+import com.MichaelRichards.Website.Entity.Tutor;
+import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -28,12 +30,12 @@ public class LoginController {
     }
 
 
-    @GetMapping("/studentLogin")
-    public String getLoginPage(Model model){
+    @GetMapping("/login")
+    public String getStudentLoginPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            model.addAttribute("student", new Student());
-            return "studentLogin";
+            model.addAttribute("user", new User());
+            return "login";
         }
 
         return "redirect:/";
