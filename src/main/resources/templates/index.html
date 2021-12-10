@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" >
   <title>Document</title>
 
 </head>
@@ -25,12 +25,11 @@
       <label class="animate__animated animate__slideInLeft logo"> <a href="/">Project</a></label>
       <ul class="animate__animated animate__slideInRight" >
         <li><a href="/" class="active">Home</a></li>
-        <li><a href="#" th:href="@{/}">Notes</a></li>
+        <li><a href="#" th:href="@{/}">Sessions</a></li>
         <li><a href="">Profile</a></li>
         <li><a href="">Pages</a></li>
-        <li sec:authorize="!isAuthenticated()"><a href="/studentLogin">Student Login</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
         <li sec:authorize="isAuthenticated()"><a class="nav-link" href="javascript: document.logoutForm.submit()" >Logout</a></li>
-        <li sec:authorize="!isAuthenticated()"><a href="/teacherLogin">Teacher login</a></li>
       </ul>
     </nav>
     </div>
@@ -41,7 +40,11 @@
     </div>
   </div>
 
-  
+  <div>
+    <section>
+
+    </section>
+  </div>
 
 
   </div>

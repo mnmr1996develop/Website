@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" th:href="@{/css/style.css}" >
-    <title>Document</title>
+    <title>Michael</title>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
         <div id = "registerBody" >
 
             
-            <form action="#" th:action="@{register/processStudentRegistrationForm}" method="post" class="form-horizontal" th:object="${student}">
+            <form action="#" th:action="@{processTutorRegistrationForm}" method="post" class="form-horizontal" th:object="${tutor}">
 
                 <div>
                     <input type="text" placeholder="First Name" class="input-group-addon" th:field="*{firstName}"/>
