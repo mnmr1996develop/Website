@@ -1,7 +1,7 @@
 package com.MichaelRichards.Website.Service;
 
-import com.MichaelRichards.Website.DAO.TeacherRepository;
-import com.MichaelRichards.Website.Entity.Teacher;
+import com.MichaelRichards.Website.DAO.TutorRepository;
+import com.MichaelRichards.Website.Entity.Tutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,24 +18,24 @@ public class TeacherService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    TeacherRepository teacherRepository;
+    TutorRepository tutorRepository;
 
-    public List<Teacher> findAll(){
-        List<Teacher> teachers = teacherRepository.findAll();
-        if (teachers.isEmpty()){
+    public List<Tutor> findAll(){
+        List<Tutor> tutors = tutorRepository.findAll();
+        if (tutors.isEmpty()){
             return new ArrayList<>();
         }
-        else return teachers;
+        else return tutors;
     }
 
     @Transactional
-    public String save(Teacher teacher){
-        teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+    public String save(Tutor tutor){
+        tutor.setPassword(passwordEncoder.encode(tutor.getPassword()));
 
         String token = UUID.randomUUID().toString();
 
-        System.out.println(teacher);
-        teacherRepository.save(teacher);
+        System.out.println(tutor);
+        tutorRepository.save(tutor);
 
         return token;
     }
