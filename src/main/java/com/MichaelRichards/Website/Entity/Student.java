@@ -1,8 +1,12 @@
 package com.MichaelRichards.Website.Entity;
 
+import com.MichaelRichards.Website.Model.Review;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -24,6 +28,12 @@ public class Student extends User {
     private UserRoles userRoles;
 
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
+                targetEntity = Tutor.class)
+    @JoinTable(name = "tutors",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "tutor_id"))
+    private List<Tutor> tutors;
 
 
     public Student() {
@@ -70,4 +80,18 @@ public class Student extends User {
         this.userRoles = userRoles;
     }
 
+    public void addTutor(Tutor tutor){
+        if(tutors == null){
+            tutors = new ArrayList<>();
+        }
+        tutors.add(tutor);
+    }
+
+    public List<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public void setTutors(List<Tutor> tutors) {
+        this.tutors = tutors;
+    }
 }

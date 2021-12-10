@@ -1,15 +1,19 @@
 package com.MichaelRichards.Website.Entity;
 
 
+import com.MichaelRichards.Website.Model.TutorDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-@Table(name = "teacher")
+@Table(name = "tutor")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Teacher extends User {
+public class Tutor extends User {
 
     @NotNull
     @Column(name = "locked")
@@ -22,19 +26,26 @@ public class Teacher extends User {
     @Transient
     private UserRoles userRoles;
 
+    @ManyToMany(mappedBy = "tutors")
+    private List<Student> students;
 
-    public Teacher() {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tutor_details_id")
+    private TutorDetails tutorDetails;
+
+
+    public Tutor() {
         super();
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.Teacher;
+        this.userRoles = UserRoles.Tutor;
     }
 
-    public Teacher(String firstName, String lastName, String username, String password, String email, LocalDate birthday) {
+    public Tutor(String firstName, String lastName, String username, String password, String email, LocalDate birthday) {
         super(firstName, lastName, username, password, email, birthday);
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.Teacher;
+        this.userRoles = UserRoles.Tutor;
     }
 
     @Override
@@ -67,4 +78,27 @@ public class Teacher extends User {
         this.userRoles = userRoles;
     }
 
+    public void addStudent(Student student){
+        if(students == null){
+            students = new ArrayList<>();
+
+        }
+        students.add(student);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public TutorDetails getTutorDetails() {
+        return tutorDetails;
+    }
+
+    public void setTutorDetails(TutorDetails tutorDetails) {
+        this.tutorDetails = tutorDetails;
+    }
 }

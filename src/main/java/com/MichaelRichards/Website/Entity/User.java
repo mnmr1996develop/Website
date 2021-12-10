@@ -55,18 +55,16 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @Transient
+    @Enumerated(EnumType.STRING)
     private UserRoles userRoles;
 
     @Transient
     private Integer age;
 
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("userRoles.name()");
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRoles.name());
         return Collections.singletonList(simpleGrantedAuthority);
     }
 

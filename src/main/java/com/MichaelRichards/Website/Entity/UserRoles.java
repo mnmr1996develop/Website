@@ -2,6 +2,6 @@ package com.MichaelRichards.Website.Entity;
 
 public enum UserRoles {
     User,
-    Teacher,
+    Tutor,
     Principle
 }
