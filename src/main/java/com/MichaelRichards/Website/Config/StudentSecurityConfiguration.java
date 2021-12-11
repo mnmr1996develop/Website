@@ -1,6 +1,5 @@
 package com.MichaelRichards.Website.Config;
 
-import com.MichaelRichards.Website.Service.StudentService;
 import com.MichaelRichards.Website.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

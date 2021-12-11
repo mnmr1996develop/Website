@@ -4,13 +4,12 @@ package com.MichaelRichards.Website.Controller;
 import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Tutor;
 import com.MichaelRichards.Website.Entity.User;
+import com.MichaelRichards.Website.Exceptions.UserNotFoundException;
 import com.MichaelRichards.Website.Service.StudentService;
 import com.MichaelRichards.Website.Service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class APIController {
     @Autowired
     TutorService tutorService;
 
-    @GetMapping(path = "/student")
+    @GetMapping(path = "/students")
     public List<Student> findAllStudents(){
         return studentService.findAll();
     }
@@ -42,9 +41,16 @@ public class APIController {
         return tutorService.findAll();
     }
 
-    @PostMapping(path = "/student")
+    @PostMapping(path = "/students")
     public String findAllTeachers(Student student){
         return studentService.save(student);
+    }
+
+    @GetMapping("/students/{studentId}")
+    public Student getStudent(@PathVariable Long studentId){
+        return studentService.findUserById(
+                studentId).orElseThrow(
+                        () -> new UserNotFoundException("User Not Found - " + studentId));
     }
 
 }

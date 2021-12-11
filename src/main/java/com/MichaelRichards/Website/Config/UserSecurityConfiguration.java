@@ -24,6 +24,7 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/register/tutor").hasRole(UserRoles.Admin.name())
                 .and()
                 .formLogin()
                 .loginPage("/studentLogin")

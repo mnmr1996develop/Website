@@ -2,7 +2,6 @@ package com.MichaelRichards.Website.Controller;
 
 import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Tutor;
-import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
 import com.MichaelRichards.Website.Service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +102,7 @@ public class RegistrationController {
         }
 
         tutorService.save(tutor);
-        return "index";
+        return "redirect:/login";
 
     }
 }

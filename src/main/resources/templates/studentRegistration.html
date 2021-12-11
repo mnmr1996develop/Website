@@ -41,7 +41,7 @@
         <div id = "registerBody" >
 
             
-            <form action="#" th:action="@{register/processStudentRegistrationForm}" method="post" class="form-horizontal" th:object="${student}">
+            <form action="#" th:action="@{processStudentRegistrationForm}" method="post" class="form-horizontal" th:object="${student}">
 
                 <div>
                     <input type="text" placeholder="First Name" class="input-group-addon" th:field="*{firstName}"/>
