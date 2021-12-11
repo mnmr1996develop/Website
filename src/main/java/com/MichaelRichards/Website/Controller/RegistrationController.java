@@ -2,8 +2,10 @@ package com.MichaelRichards.Website.Controller;
 
 import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Tutor;
+import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
 import com.MichaelRichards.Website.Service.TutorService;
+import com.MichaelRichards.Website.Service.UserBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +22,10 @@ import javax.validation.Valid;
 @RequestMapping(path = "/register")
 public class RegistrationController {
 
+
     @Autowired
-    private StudentService studentService;
-    
-    @Autowired
-    private TutorService tutorService;
+    private UserBaseService userBaseService;
+
 
     @GetMapping("/student")
     public String getRegistrationPage(Model model){
@@ -44,30 +45,16 @@ public class RegistrationController {
             BindingResult result,
             Model model){
 
-        Student findIfStudentUsernameInDatabase = studentService.findUserByUsername(student.getUsername()).orElse(null);
-        Student findIfStudentEmailInDatabase = studentService.findUserByEmail(student.getEmail()).orElse(null);
-
-        Tutor findIfTutorUsernameInDatabase = tutorService.findUserByUsername(student.getUsername()).orElse(null);
-        Tutor findIfTutorEmailInDatabase = tutorService.findUserByEmail(student.getEmail()).orElse(null);
-
-        if(findIfStudentUsernameInDatabase != null || findIfStudentEmailInDatabase != null ||
-                findIfTutorUsernameInDatabase != null || findIfTutorEmailInDatabase != null){
-            if (findIfStudentUsernameInDatabase != null || findIfTutorUsernameInDatabase != null){
-                model.addAttribute("usernameRegistrationError" , "username already Taken");
-            }
-            if (findIfStudentEmailInDatabase != null){
-                model.addAttribute("emailRegistrationError", "Email is already taken");
-            }
-
-            return "studentRegistration";
+        String userDetailsTaken = areUserDetailsTaken(student, model,"studentRegistration");
+        if(userDetailsTaken != null){
+            return userDetailsTaken;
         }
-
 
         if(result.hasErrors()){
             return "studentRegistration";
         }
 
-        studentService.save(student);
+        userBaseService.getStudentService().save(student);
         return "redirect:/login";
 
     }
@@ -78,31 +65,40 @@ public class RegistrationController {
             BindingResult result,
             Model model){
 
-        Student findIfStudentUsernameInDatabase = studentService.findUserByUsername(tutor.getUsername()).orElse(null);
-        Student findIfStudentEmailInDatabase = studentService.findUserByEmail(tutor.getEmail()).orElse(null);
-
-        Tutor findIfTutorUsernameInDatabase = tutorService.findUserByUsername(tutor.getUsername()).orElse(null);
-        Tutor findIfTutorEmailInDatabase = tutorService.findUserByEmail(tutor.getEmail()).orElse(null);
-
-        if(findIfStudentUsernameInDatabase != null || findIfStudentEmailInDatabase != null ||
-                findIfTutorUsernameInDatabase != null || findIfTutorEmailInDatabase != null){
-            if (findIfStudentUsernameInDatabase != null || findIfTutorUsernameInDatabase != null){
-                model.addAttribute("usernameRegistrationError" , "username already Taken");
-            }
-            if (findIfStudentEmailInDatabase != null){
-                model.addAttribute("emailRegistrationError", "Email is already taken");
-            }
-
-            return "studentRegistration";
+        String userDetailsTaken = areUserDetailsTaken(tutor, model, "tutorRegistration");
+        if(userDetailsTaken != null){
+            return userDetailsTaken;
         }
-
 
         if(result.hasErrors()){
             return "studentRegistration";
         }
 
-        tutorService.save(tutor);
+        userBaseService.getTutorService().save(tutor);
         return "redirect:/login";
 
     }
+
+
+    private String areUserDetailsTaken(User user, Model model, String redirectSite){
+        boolean isEmailTaken = userBaseService.isEmailTaken(user.getEmail());
+        boolean isUsernameTaken = userBaseService.isUsernameTaken(user.getUsername());
+
+        if(isUsernameTaken){
+            model.addAttribute("usernameRegistrationError" , "username already Taken");
+        }
+
+        if(isEmailTaken){
+            model.addAttribute("emailRegistrationError", "Email is already taken");
+        }
+
+        if(isEmailTaken|| isUsernameTaken){
+            return redirectSite;
+        }
+
+        return null;
+    }
+
+
+
 }

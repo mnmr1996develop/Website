@@ -1,38 +1,69 @@
 package com.MichaelRichards.Website.Service;
 
-import com.MichaelRichards.Website.DAO.StudentRepository;
-import com.MichaelRichards.Website.DAO.TutorRepository;
+
+import com.MichaelRichards.Website.DAO.UserRepository;
 import com.MichaelRichards.Website.Entity.Student;
-import com.MichaelRichards.Website.Entity.Tutor;
+import com.MichaelRichards.Website.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Objects;
+
+import javax.transaction.Transactional;
+import java.util.*;
 
 
 
-@Service
-public class UserService implements UserDetailsService {
+public abstract class UserService<T extends User, K extends UserRepository<T>>  {
+
 
     @Autowired
-    private StudentRepository studentRepository;
+    private K userRepository;
+
 
     @Autowired
-    private TutorRepository tutorRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Student student = studentRepository.findByUsername(username).orElse(null);
-        Tutor tutor = tutorRepository.findByUsername(username).orElse(null);
-
-        if(student == null && tutor == null){
-            throw new UsernameNotFoundException("No user by that name");
+    public List<T> findAll(){
+        List<T> users = userRepository.findAll();
+        if (users.isEmpty()){
+            return new ArrayList<>();
         }
-        else return Objects.requireNonNullElse(student, tutor);
+        else return users;
     }
+
+    @Transactional
+    public String save(T user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        String token = UUID.randomUUID().toString();
+        System.out.println(user);
+        userRepository.save(user);
+        return token;
+    }
+
+    public Optional<T> findUserById(long id) throws UsernameNotFoundException{
+        return  userRepository.findById(id);
+    }
+
+    public Optional<T> findUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+    }
+
+    public Optional<T> findUserByEmail(String email) throws UsernameNotFoundException{
+        return userRepository.findByEmail(email);
+    }
+
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        T user;
+//        user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No User by that name"));
+//        return user;
+//    }
+
 
 }

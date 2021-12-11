@@ -1,5 +1,7 @@
 package com.MichaelRichards.Website.Config;
 
+import com.MichaelRichards.Website.Service.StudentService;
+import com.MichaelRichards.Website.Service.UserBaseService;
 import com.MichaelRichards.Website.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +21,7 @@ public class StudentSecurityConfiguration  extends WebSecurityConfigurerAdapter 
 
 
     @Autowired
-    private UserService userService;
+    private UserBaseService userBaseService;
 
 
     @Override
@@ -32,7 +34,7 @@ public class StudentSecurityConfiguration  extends WebSecurityConfigurerAdapter 
     DaoAuthenticationProvider daoStudentAuthenticationProvider(){
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
+        provider.setUserDetailsService(userBaseService);
         provider.setPasswordEncoder(new PasswordEncoderClass().passwordEncoder());
         return provider;
     }

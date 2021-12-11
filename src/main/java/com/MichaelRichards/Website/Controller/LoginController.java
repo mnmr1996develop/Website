@@ -4,6 +4,7 @@ import com.MichaelRichards.Website.Entity.Student;
 import com.MichaelRichards.Website.Entity.Tutor;
 import com.MichaelRichards.Website.Entity.User;
 import com.MichaelRichards.Website.Service.StudentService;
+import com.MichaelRichards.Website.Service.UserBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,11 +23,11 @@ public class LoginController {
     }
 
     @Autowired
-    private StudentService studentService;
+    private UserBaseService userBaseService;
 
     @Autowired
-    public LoginController(StudentService studentService){
-        this.studentService = studentService;
+    public LoginController(UserBaseService userBaseService){
+        this.userBaseService = userBaseService;
     }
 
 

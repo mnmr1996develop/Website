@@ -101,7 +101,7 @@ public class User implements UserDetails {
     public User() {
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.User;
+        this.userRoles = UserRoles.Student;
     }
 
     public User(String firstName, String lastName, String username, String password, String email, LocalDate birthday) {
@@ -113,7 +113,7 @@ public class User implements UserDetails {
         this.birthday = birthday;
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.User;
+        this.userRoles = UserRoles.Student;
     }
 
     public Long getId() {

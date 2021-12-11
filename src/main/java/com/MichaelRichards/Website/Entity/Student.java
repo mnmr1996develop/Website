@@ -40,14 +40,14 @@ public class Student extends User {
         super();
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.User;
+        this.userRoles = UserRoles.Student;
     }
 
     public Student(String firstName, String lastName, String username, String password, String email, LocalDate birthday) {
         super(firstName, lastName, username, password, email, birthday);
         this.locked = false;
         this.enabled = true;
-        this.userRoles = UserRoles.User;
+        this.userRoles = UserRoles.Student;
     }
 
     @Override
